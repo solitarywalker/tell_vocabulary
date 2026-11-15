@@ -1,6 +1,6 @@
 # tell_vocabulary
 
-英会話学習アプリ Tell が使う語彙データです。アプリはこのデータを同梱せず、初回起動のときに、このリポジトリのタグを付けた版からダウンロードします。ダウンロードしたファイルは、アプリに書いてある SHA-256 と照らし合わせます。
+英会話学習アプリ Tell が使う語彙データと、それを作るための元データです。アプリはこのデータを同梱せず、初回起動のときに、このリポジトリのタグを付けた版からダウンロードします。ダウンロードしたファイルは、アプリに書いてある SHA-256 と照らし合わせます。`wordnet/` と `numberbatch/` は、Tell の `tools/Tell.DataBuilder` で `generated/` を作り直すときだけ使う元データで、アプリはダウンロードしません。
 
 | ディレクトリ | 内容 | ライセンス |
 | --- | --- | --- |
@@ -8,12 +8,16 @@
 | `vocabulary/` | 手で管理しているデータ（許可リストなど） | CC BY-SA 4.0 |
 | `ngsl/` | NGSL 1.2 の公式リストの写し | CC BY-SA 4.0 |
 | `cefrj/` | CEFR-J Wordlist 1.5 の写し | 独自の条件（下記） |
+| `wordnet/` | Open English WordNet 2025 の写し（DataBuilder の元データ） | CC BY 4.0 |
+| `numberbatch/` | ConceptNet Numberbatch 19.08 から、NGSL の見出し語の行だけを取り出したもの（DataBuilder の元データ） | CC BY-SA 4.0 |
 
-## なぜ NGSL と CEFR-J の写しを置いているか
+## なぜ配布元のデータの写しを置いているか
 
 アプリは、ダウンロードしたファイルが、データを作ったときのものと同じかを SHA-256 で確かめます。NGSL と CEFR-J を配布元から直接ダウンロードすると、配布元でファイルが差し替えられたとき（版の更新や、表記の手直しなど）にハッシュが合わなくなります。そうなると、アプリを更新するまで、新しくインストールした人は初回起動のダウンロードを終えられません。また、差し替えられた内容は、このリポジトリの生成データ（`generated/`）を作ったときの元データと食い違います。
 
 そのため、データを作ったときに使ったファイルを、そのままここに写して置いています。中身は一切変えていません。
+
+DataBuilder の元データ（WordNet と Numberbatch）も、同じく、配布元で差し替えられたり、配布が止まったりしても、`generated/` を同じ元データから作り直せるように置いています（ConceptNet は更新が止まっているプロジェクトです）。Numberbatch の元のファイル（英語のみ、約325MB）は、GitHub に置ける大きさを超えるため置かず、NGSL の見出し語の行だけを取り出したものを置いています。今の `generated/` は、これだけで作り直せます。元のファイルが要るのは、NGSL の見出し語の一覧そのものを変えたときだけです。
 
 CEFR-J Wordlist の利用条件には、再配布してよいかが書かれていません。ここに置いているのは、上の理由でファイルの差し替えに備えるためだけです。権利者から求められた場合は、すぐに取り下げます。
 
@@ -54,13 +58,29 @@ CEFR-J Wordlist の利用条件には、再配布してよいかが書かれて�
 
 取得元は https://github.com/openlanguageprofiles/olp-en-cefrj （元の配布は http://www.cefr-j.org/download.html ）、取得日は 2026-11-14。
 
+## wordnet/
+
+| ファイル | 内容 |
+| --- | --- |
+| `english-wordnet-2025.xml.gz` | Open English WordNet 2025（約11MB）。`generated/excluded_nouns.csv`・`topic_words.csv` の元データ |
+
+取得元は https://github.com/globalwordnet/english-wordnet/releases/tag/2025-edition 、取得日は 2026-11-14。
+
+## numberbatch/
+
+| ファイル | 内容 |
+| --- | --- |
+| `numberbatch-ngsl.txt.gz` | ConceptNet Numberbatch 19.08（英語のみ）から、NGSL の見出し語の行だけを取り出したもの（約1.8MB）。`generated/semantic_vectors.csv` の元データ。Tell の DataBuilder が作る |
+
+元のファイルは https://conceptnet.s3.amazonaws.com/downloads/2019/numberbatch/numberbatch-en-19.08.txt.gz （2026-11-13 に取得）。
+
 ## 出典・ライセンス
 
 | データ | ライセンス | 出典 |
 | --- | --- | --- |
 | NGSL 1.2 | CC BY-SA 4.0 | Browne, C., Culligan, B., & Phillips, J. *The New General Service List* (version 1.2). https://www.newgeneralservicelist.com/ |
-| Open English WordNet 2025 | CC BY 4.0 | McCrae, J. P., et al. https://github.com/globalwordnet/english-wordnet （`generated/` の元データ。ここには置いていない） |
-| ConceptNet Numberbatch 19.08 | CC BY-SA 4.0 | Luminoso Technologies, Inc. https://github.com/commonsense/conceptnet-numberbatch 。Speer, R., Chin, J., & Havasi, C. (2017). ConceptNet 5.5: An Open Multilingual Graph of General Knowledge. AAAI 2017（`generated/` の元データ。ここには置いていない） |
+| Open English WordNet 2025 | CC BY 4.0 | McCrae, J. P., et al. https://github.com/globalwordnet/english-wordnet （`wordnet/` に写しを置いている） |
+| ConceptNet Numberbatch 19.08 | CC BY-SA 4.0 | Luminoso Technologies, Inc. https://github.com/commonsense/conceptnet-numberbatch 。Speer, R., Chin, J., & Havasi, C. (2017). ConceptNet 5.5: An Open Multilingual Graph of General Knowledge. AAAI 2017（NGSL の見出し語の行だけを `numberbatch/` に置いている） |
 | `generated/` | CC BY-SA 4.0 | NGSL・Open English WordNet・Numberbatch から生成。NGSL を加工したデータのため、NGSL と同じライセンスになる |
 | `vocabulary/` | CC BY-SA 4.0 | Tell の開発者が作成 |
 | CEFR-J Wordlist 1.5 | 独自の条件（研究・商用とも無料、出典の表示が必要。CC BY-SA ではない） | The CEFR-J Wordlist Version 1.5. Compiled by Yukio Tono, Tokyo University of Foreign Studies. 著作権は東京外国語大学 投野研究室 |
@@ -72,5 +92,5 @@ CC BY-SA 4.0：https://creativecommons.org/licenses/by-sa/4.0/
 ## 更新のしかた
 
 1. `vocabulary/` は、このリポジトリで直接直してコミットする。
-2. `generated/` は、Tell のリポジトリで `dotnet run --project tools/Tell.DataBuilder` を実行して作り直す（出力先はこのリポジトリの `generated/`）。
+2. `generated/` は、Tell のリポジトリで `dotnet run --project tools/Tell.DataBuilder` を実行して作り直す（出力先はこのリポジトリの `generated/`）。Numberbatch の元のファイルを Tell の `tools/fetch-numberbatch.sh` で取ってあれば、`numberbatch/` も作り直す。
 3. 新しい版を出すときは、タグ（`v1`、`v2` …）を打って push し、Tell の側のファイルの一覧（タグと SHA-256）を更新する。打ったタグの中身は変えない（アプリがそのタグの SHA-256 を持っているため）。
