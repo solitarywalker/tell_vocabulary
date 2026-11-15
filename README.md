@@ -91,6 +91,6 @@ CC BY-SA 4.0：https://creativecommons.org/licenses/by-sa/4.0/
 
 ## 更新のしかた
 
-1. `vocabulary/` は、このリポジトリで直接直して commit する。
+1. `vocabulary/` は、このリポジトリで直接直してコミットする。
 2. `generated/` は、Tell のリポジトリで `dotnet run --project tools/Tell.DataBuilder` を実行して作り直す（出力先はこのリポジトリの `generated/`）。Numberbatch の元のファイルを Tell の `tools/fetch-numberbatch.sh` で取ってあれば、`numberbatch/` も作り直す。
-3. 新しい版を出すときは、タグ（`v1`、`v2` …）を打って push し、Tell の側のファイルの一覧（タグと SHA-256）を更新する。打ったタグの中身は変えない（アプリがそのタグの SHA-256 を持っているため）。
+3. 新しい版を出すときは、タグ（`v1`、`v2` …）を打ってプッシュし、Tell の側のファイルの一覧（タグと SHA-256）を更新する。打ったタグの中身は変えない（アプリがそのタグの SHA-256 を持っているため）。
