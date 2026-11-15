@@ -1,0 +1,86 @@
+# 会話の話題に向かないため、話題の材料にしない語の一覧。
+#
+# 話題の材料から外すだけで、語彙チェックには使わない（AI やユーザーが使うのは構わない）。
+# 友だちとの気軽な会話で、話題にすると話が重くなったり、気まずくなったりする語を入れる。
+# 日常の話題で自然に使える語（pain、sick、accident、beer、fire など）は入れない。
+#
+# 形式：1行に1語（NGSL の見出し語）。"#" 以降はコメント。
+
+# 暴力・武器
+kill
+murder
+violence
+violent
+weapon
+gun
+bomb
+shoot
+knife
+terrorist
+abuse
+victim
+wound
+injure
+
+# 犯罪・刑罰
+crime
+criminal
+steal
+prison
+jail
+arrest
+
+# 死
+death
+dead
+die
+bury
+
+# 性
+sex
+sexual
+abortion
+
+# 差別・侮辱・汚い言葉
+racial
+slave
+stupid
+ugly
+fool
+damn
+hell
+bloody
+
+# 戦争・軍事
+war
+army
+soldier
+troop
+military
+battle
+nuclear
+enemy
+
+# 重い病気・心の病
+cancer
+depression
+disorder
+
+# 立ち入った私的なこと
+divorce
+affair
+pregnant
+pregnancy
+breast
+
+# 宗教・政治・民族
+religion
+religious
+god
+pray
+politics
+political
+ethnic
+minority
+immigrant
+refugee

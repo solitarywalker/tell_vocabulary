@@ -1,0 +1,76 @@
+# tell_vocabulary
+
+英会話学習アプリ Tell が使う語彙データです。アプリはこのデータを同梱せず、初回起動のときに、このリポジトリのタグを付けた版からダウンロードします。ダウンロードしたファイルは、アプリに書いてある SHA-256 と照らし合わせます。
+
+| ディレクトリ | 内容 | ライセンス |
+| --- | --- | --- |
+| `generated/` | Tell の `tools/Tell.DataBuilder` で生成したデータ | CC BY-SA 4.0 |
+| `vocabulary/` | 手で管理しているデータ（許可リストなど） | CC BY-SA 4.0 |
+| `ngsl/` | NGSL 1.2 の公式リストの写し | CC BY-SA 4.0 |
+| `cefrj/` | CEFR-J Wordlist 1.5 の写し | 独自の条件（下記） |
+
+## なぜ NGSL と CEFR-J の写しを置いているか
+
+アプリは、ダウンロードしたファイルが、データを作ったときのものと同じかを SHA-256 で確かめます。NGSL と CEFR-J を配布元から直接ダウンロードすると、配布元でファイルが差し替えられたとき（版の更新や、表記の手直しなど）にハッシュが合わなくなります。そうなると、アプリを更新するまで、新しくインストールした人は初回起動のダウンロードを終えられません。また、差し替えられた内容は、このリポジトリの生成データ（`generated/`）を作ったときの元データと食い違います。
+
+そのため、データを作ったときに使ったファイルを、そのままここに写して置いています。中身は一切変えていません。
+
+CEFR-J Wordlist の利用条件には、再配布してよいかが書かれていません。ここに置いているのは、上の理由でファイルの差し替えに備えるためだけです。権利者から求められた場合は、すぐに取り下げます。
+
+## generated/
+
+| ファイル | 内容 |
+| --- | --- |
+| `excluded_nouns.csv` | NGSL 外の動詞・形容詞・副詞と関連しているため、範囲外とする名詞（約10,000語） |
+| `semantic_vectors.csv` | NGSL の見出し語の意味のベクトル（Numberbatch の300次元から全語の平均を引き、長さを1にして8ビットに縮めたもの）。意味の近さをコサイン類似度で測る |
+| `topic_words.csv` | 最初の一言・新しい話題の材料にする具体的な名詞（WordNet の最初の名詞の意味の分類で選ぶ。形容詞・副詞にもなる語は除く） |
+| `word_ranks.csv` | NGSL の本体の見出し語の頻度の順位（SFI の高い順）。順位が大きいほど難しいとみなす（約2,800語） |
+
+## vocabulary/
+
+| ファイル | 内容 |
+| --- | --- |
+| `allowed_nouns.txt` | 除外ルールに当てはまるが、易しいので許可する名詞（名詞と判定されたときだけ許可） |
+| `allowed_words.txt` | チェッカーの誤判定を直すため、品詞にかかわらず許可する語。会話で見つけたときに追加する |
+| `topic_excluded_words.txt` | `generated/topic_words.csv` に紛れ込むが、話題の材料にしない語（抽象的な語、主に動詞として使う語など） |
+| `unsuitable_words.txt` | 会話の話題に向かないため、話題の材料にしない語（暴力・性・差別など）。語彙チェックには使わない |
+
+## ngsl/
+
+| ファイル | 内容 |
+| --- | --- |
+| `NGSL_12_lemmatized_for_research.csv` | 研究用。考えられる活用形をすべて含む |
+| `NGSL_12_lemmatized_for_teaching.csv` | 教育用。よく使われる活用形のみ |
+| `SUP_lemmatized.csv` | 補足リスト（曜日・月・数詞など52語） |
+| `NGSLwithSFI-31K.xlsx` | 約31,000語の頻度順位。`generated/word_ranks.csv` の元データ。アプリはダウンロードしない |
+
+取得元は https://www.newgeneralservicelist.com/ 、取得日は 2026-11-08。
+
+## cefrj/
+
+| ファイル | 内容 |
+| --- | --- |
+| `cefrj-vocabulary-profile-1.5.csv` | 見出し語・品詞・CEFR の段階（A1〜B2）など。Tell は A1〜B1 の語を、NGSL の範囲外でも AI の返答で使ってよい語にする |
+
+取得元は https://github.com/openlanguageprofiles/olp-en-cefrj （元の配布は http://www.cefr-j.org/download.html ）、取得日は 2026-11-14。
+
+## 出典・ライセンス
+
+| データ | ライセンス | 出典 |
+| --- | --- | --- |
+| NGSL 1.2 | CC BY-SA 4.0 | Browne, C., Culligan, B., & Phillips, J. *The New General Service List* (version 1.2). https://www.newgeneralservicelist.com/ |
+| Open English WordNet 2025 | CC BY 4.0 | McCrae, J. P., et al. https://github.com/globalwordnet/english-wordnet （`generated/` の元データ。ここには置いていない） |
+| ConceptNet Numberbatch 19.08 | CC BY-SA 4.0 | Luminoso Technologies, Inc. https://github.com/commonsense/conceptnet-numberbatch 。Speer, R., Chin, J., & Havasi, C. (2017). ConceptNet 5.5: An Open Multilingual Graph of General Knowledge. AAAI 2017（`generated/` の元データ。ここには置いていない） |
+| `generated/` | CC BY-SA 4.0 | NGSL・Open English WordNet・Numberbatch から生成。NGSL を加工したデータのため、NGSL と同じライセンスになる |
+| `vocabulary/` | CC BY-SA 4.0 | Tell の開発者が作成 |
+| CEFR-J Wordlist 1.5 | 独自の条件（研究・商用とも無料、出典の表示が必要。CC BY-SA ではない） | The CEFR-J Wordlist Version 1.5. Compiled by Yukio Tono, Tokyo University of Foreign Studies. 著作権は東京外国語大学 投野研究室 |
+
+> This data contains semantic vectors from ConceptNet Numberbatch, by Luminoso Technologies, Inc. You may redistribute or modify the data under the terms of the CC-By-SA 4.0 license.
+
+CC BY-SA 4.0：https://creativecommons.org/licenses/by-sa/4.0/
+
+## 更新のしかた
+
+1. `vocabulary/` は、このリポジトリで直接直してコミットする。
+2. `generated/` は、Tell のリポジトリで `dotnet run --project tools/Tell.DataBuilder` を実行して作り直す（出力先はこのリポジトリの `generated/`）。
+3. 新しい版を出すときは、タグ（`v1`、`v2` …）を打って push し、Tell の側のファイルの一覧（タグと SHA-256）を更新する。打ったタグの中身は変えない（アプリがそのタグの SHA-256 を持っているため）。

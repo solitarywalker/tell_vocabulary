@@ -1,0 +1,77 @@
+# 話題の材料にしない語の一覧。
+#
+# generated/topic_words.csv（WordNet の分類で選んだ具体的な名詞）に紛れ込む、抽象的な語や、
+# 名詞としてはまれで主に動詞として使う語を入れる。
+# 気軽な会話の話題にしにくい、仕事・お金の堅い語も入れる。
+#
+# 形式：1行に1語（NGSL の見出し語）。"#" 以降はコメント。
+
+# 抽象的な語
+addition
+affect
+amount
+benefit
+cause
+consequence
+despite
+effect
+everything
+factor
+improvement
+instance
+nobody
+option
+piece
+position
+rate
+response
+result
+solution
+source
+structure
+success
+trend
+trust
+# 名詞としてはまれで、主に動詞として使う語
+break
+check
+combine
+cover
+draw
+fall
+feed
+gather
+handle
+hide
+launch
+load
+mix
+pause
+reach
+refuse
+release
+repeat
+rise
+roll
+seek
+settle
+shake
+shift
+stick
+stop
+surround
+switch
+touch
+wait
+win
+wish
+wonder
+# 堅い仕事・お金の語
+budget
+fund
+grant
+profit
+revenue
+
+# 個人的すぎる質問になる語
+date  # 「Are you seeing someone special for a date soon?」になった（2026-11-14）
