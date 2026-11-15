@@ -27,8 +27,11 @@ CEFR-J Wordlist の利用条件には、再配布してよいかが書かれて�
 | --- | --- |
 | `excluded_nouns.csv` | NGSL 外の動詞・形容詞・副詞と関連しているため、範囲外とする名詞（約10,000語） |
 | `semantic_vectors.csv` | NGSL の見出し語の意味のベクトル（Numberbatch の300次元から全語の平均を引き、長さを1にして8ビットに縮めたもの）。意味の近さをコサイン類似度で測る |
-| `topic_words.csv` | 最初の一言・新しい話題の材料にする具体的な名詞（WordNet の最初の名詞の意味の分類で選ぶ。形容詞・副詞にもなる語は除く） |
+| `topic_words.csv` | 最初の一言・新しい話題の材料にする具体的な名詞（WordNet の最初の名詞の意味の分類で選ぶ。形容詞・副詞にもなる語は除く。v3 は noun.artifact・food・animal・plant・location・object・substance・phenomenon・event の9分類） |
 | `word_ranks.csv` | NGSL の本体の見出し語の頻度の順位（SFI の高い順）。順位が大きいほど難しいとみなす（約2,800語） |
+
+| `word_glosses.csv` | NGSL と CEFR-J A1〜B1 の4,697語の WordNet の定義11,752個。1語につき3義まで、各義の最初の例文を1つ（あれば）。品詞内は WordNet の頻度順。品詞をまたぐ頻度の記録はないため、各品詞の第1義を先にし、同順位は名詞・動詞・形容詞・副詞の順 |
+| `word_synonyms.csv` | WordNet の同じ synset に属する NGSL の語の組。返事で使ってもよい語を選ぶとき、単なる類義語を避けるために使う |
 
 ## vocabulary/
 
@@ -38,6 +41,8 @@ CEFR-J Wordlist の利用条件には、再配布してよいかが書かれて�
 | `allowed_words.txt` | チェッカーの誤判定を直すため、品詞にかかわらず許可する語。会話で見つけたときに追加する |
 | `topic_excluded_words.txt` | `generated/topic_words.csv` に紛れ込むが、話題の材料にしない語（抽象的な語、主に動詞として使う語など） |
 | `unsuitable_words.txt` | 会話の話題に向かないため、話題の材料にしない語（暴力・性・差別など）。語彙チェックには使わない |
+
+| `conversation_excluded_words.txt` | 話題の材料と、返事で使ってもよい語の両方から除く語（user・fellow・scene など、人の呼び方や意味のぼやけた語）。語彙チェックには使わない |
 
 ## ngsl/
 
@@ -62,7 +67,7 @@ CEFR-J Wordlist の利用条件には、再配布してよいかが書かれて�
 
 | ファイル | 内容 |
 | --- | --- |
-| `english-wordnet-2025.xml.gz` | Open English WordNet 2025（約11MB）。`generated/excluded_nouns.csv`・`topic_words.csv` の元データ |
+| `english-wordnet-2025.xml.gz` | Open English WordNet 2025（約11MB）。`generated/excluded_nouns.csv`・`topic_words.csv`・`word_glosses.csv`・`word_synonyms.csv` の元データ |
 
 取得元は https://github.com/globalwordnet/english-wordnet/releases/tag/2025-edition 、取得日は 2026-11-14。
 

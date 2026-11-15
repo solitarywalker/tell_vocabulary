@@ -1,6 +1,6 @@
 ## NGSL 外の動詞・形容詞・副詞と関連しているため、語彙チェックで範囲外とする名詞の一覧。
 ## 形式：名詞,関連する NGSL 外の語（空白区切り）
-## tools/Tell.DataBuilder で生成。手で編集しないこと（例外は data/vocabulary/allowed_nouns.txt に書く）。
+## tools/Tell.DataBuilder で生成。手で編集しないこと（例外は tell_vocabulary の vocabulary/allowed_nouns.txt に書く）。
 ## 元データ：NGSL 1.2（CC BY-SA 4.0）、Open English WordNet 2025（CC BY 4.0）
 ## このファイルのライセンス：CC BY-SA 4.0
 abasement,abase

@@ -1,0 +1,20 @@
+# 話題の材料と、使ってよい語のどちらにも渡さない語。語彙チェックには使わない。
+# 2026-11-15：Neha・通りで人の呼び方や意味のぼやけた語が候補に混ざったため。
+user
+fellow
+individual
+personnel
+person
+guy
+somebody
+someone
+anyone
+anybody
+everybody
+everyone
+scene
+stuff
+thing
+sort
+kind
+type
