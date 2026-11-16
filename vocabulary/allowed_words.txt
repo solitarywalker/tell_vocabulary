@@ -2,9 +2,8 @@
 #
 # 会話の中でチェッカーが誤って範囲外と判定した語を、ここに追加する。
 # 難しい名詞の除外ルールの例外は、ここではなく allowed_nouns.txt に書く。
+# CEFR-J A1〜B1 で許可される語は重ねて入れない（2026-11-17、ユーザーの判断）。
 #
 # 形式：1行に1語。"#" 以降はコメント（見つけた日・場面・理由を書いておく）。
 
-sightseeing  # 2026-11-08 ChatConsole。sightsee（NGSL外の動詞）と関連があるため除外されたが、易しい語
-temple       # 2026-11-08 ChatConsole。"temple visits" で品詞推定が形容詞と判定した
 English      # 2026-11-14 ChatConsole。英語の練習の話で相手が口にすると、simple language に言い換えていた

@@ -1,77 +1,31 @@
-# 話題の材料にしない語の一覧。
+# 規則では外れないが、話題の材料にしない語の一覧（DataBuilder が生成時に除く）。
 #
-# generated/topic_words.csv（WordNet の分類で選んだ具体的な名詞）に紛れ込む、抽象的な語や、
-# 名詞としてはまれで主に動詞として使う語を入れる。
-# 気軽な会話の話題にしにくい、仕事・お金の堅い語も入れる。
+# 足す基準：①主に動詞として使う語、②範囲・枠組み・抽象を指す語、
+# ③機能語やほかの語と紛れる語、④地面や素材など、自分の生活から答えにくい語。
+# WordNet・CEFR-J の名詞・ConceptNet の関係の規則で外れない語のうち、
+# 実際に候補に出て困ったものだけを足す（2026-11-17、ユーザーの判断）。
 #
 # 形式：1行に1語（NGSL の見出し語）。"#" 以降はコメント。
 
 # 抽象的な語
 addition
-affect
-amount
-benefit
-cause
-consequence
-despite
-effect
-everything
-factor
-improvement
-instance
-nobody
-option
 piece
-position
-rate
-response
-result
 solution
-source
-structure
 success
-trend
-trust
 # 名詞としてはまれで、主に動詞として使う語
 break
-check
-combine
 cover
 draw
-fall
-feed
-gather
 handle
-hide
-launch
-load
-mix
-pause
-reach
 refuse
-release
-repeat
-rise
-roll
-seek
-settle
-shake
-shift
 stick
 stop
-surround
-switch
-touch
-wait
-win
-wish
-wonder
-# 堅い仕事・お金の語
-budget
-fund
-grant
-profit
-revenue
 
-# 個人的すぎる質問になる語
-date  # 「Are you seeing someone special for a date soon?」になった（2026-11-14）
+# 2026-11-17、ユーザーの判断。最初の一言の候補（200〜1,500位）に残る語。
+area    # 範囲を指し、話題がぼやける
+ground # 地面で、自分の生活から答えにくい
+earth  # 地球・地面で、話題が広すぎる
+region # 範囲を指し、話題がぼやける
+site   # 場所・範囲で、話題がぼやける
+cell   # 細胞など、自分の生活から答えにくい
+mine   # 代名詞の mine と紛れる
