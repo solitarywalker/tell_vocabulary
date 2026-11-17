@@ -1,6 +1,6 @@
 # tell_vocabulary
 
-英会話学習アプリ Tell が使う語彙データと、それを作るための元データです。アプリはこのデータを同梱せず、初回起動のときに、このリポジトリのタグを付けた版からダウンロードします。ダウンロードしたファイルは、アプリに書いてある SHA-256 と照らし合わせます。`wordnet/`・`numberbatch/`・`conceptnet/` は、Tell の `tools/Tell.DataBuilder` で `generated/` を作り直すときだけ使う元データで、アプリはダウンロードしません。
+英会話学習アプリ Tell が使う語彙データと、それを作るための元データです。アプリはこのデータを同梱せず、初回起動のときに、このリポジトリのタグを付けた版からダウンロードします。ダウンロードしたファイルは、アプリに書いてある SHA-256 と照らし合わせます。`wordnet/`・`numberbatch/`・`conceptnet/`・`simplewiktionary/` は、Tell の `tools/Tell.DataBuilder` で `generated/` を作り直すときだけ使う元データで、アプリはダウンロードしません。
 
 | ディレクトリ | 内容 | ライセンス |
 | --- | --- | --- |
@@ -9,6 +9,7 @@
 | `ngsl/` | NGSL 1.2 の公式リストの写し | CC BY-SA 4.0 |
 | `cefrj/` | CEFR-J Wordlist 1.5 の写し | 独自の条件（下記） |
 | `wordnet/` | Open English WordNet 2025 の写し（DataBuilder の元データ） | CC BY 4.0 |
+| `simplewiktionary/` | Simple English Wiktionary 2026-11-01 の配布用ダンプ（DataBuilder の元データ） | CC BY-SA 4.0 |
 | `numberbatch/` | ConceptNet Numberbatch 19.08 から、NGSL の見出し語の行だけを取り出したもの（DataBuilder の元データ） | CC BY-SA 4.0 |
 
 | `conceptnet/` | ConceptNet 5.7 assertions の人が書いた関係を NGSL の見出し語ごとに数えたもの（DataBuilder の元データ） | CC BY-SA 4.0 |
@@ -19,7 +20,7 @@
 
 そのため、データを作ったときに使ったファイルを、そのままここに写して置いています。中身は一切変えていません。
 
-DataBuilder の元データ（WordNet・Numberbatch・ConceptNet）も、同じく、配布元で差し替えられたり、配布が止まったりしても、`generated/` を同じ元データから作り直せるように置いています（ConceptNet は更新が止まっているプロジェクトです）。Numberbatch の元のファイル（英語のみ、約325MB）は、GitHub に置ける大きさを超えるため置かず、NGSL の見出し語の行だけを取り出したものを置いています。今の `generated/` は、これだけで作り直せます。元のファイルが要るのは、NGSL の見出し語の一覧そのものを変えたときだけです。
+DataBuilder の元データ（WordNet・Numberbatch・ConceptNet・Simple English Wiktionary）も、同じく、配布元で差し替えられたり、配布が止まったりしても、`generated/` を同じ元データから作り直せるように置いています（ConceptNet は更新が止まっているプロジェクトです）。Numberbatch の元のファイル（英語のみ、約325MB）は、GitHub に置ける大きさを超えるため置かず、NGSL の見出し語の行だけを取り出したものを置いています。今の `generated/` は、これだけで作り直せます。元のファイルが要るのは、NGSL の見出し語の一覧そのものを変えたときだけです。
 
 CEFR-J Wordlist の利用条件には、再配布してよいかが書かれていません。ここに置いているのは、上の理由でファイルの差し替えに備えるためだけです。権利者から求められた場合は、すぐに取り下げます。
 
@@ -32,7 +33,7 @@ CEFR-J Wordlist の利用条件には、再配布してよいかが書かれて�
 | `topic_words.csv` | 最初の一言・新しい話題の材料にする具体的な名詞（WordNet の最初の名詞の意味の分類で選ぶ。形容詞・副詞にもなる語は除く。v4 は CEFR-J に名詞の項目があり、ConceptNet の人が書いた UsedFor の始点・AtLocation の始点と終点の合計が1以上の語に絞り、`vocabulary/topic_excluded_words.txt` を生成時に除く。267語。WordNet は noun.artifact・food・animal・plant・location・object・substance・phenomenon・event の9分類） |
 | `word_ranks.csv` | NGSL の本体の見出し語の頻度の順位（SFI の高い順）。順位が大きいほど難しいとみなす（約2,800語） |
 
-| `word_glosses.csv` | NGSL と CEFR-J A1〜B1 の4,697語の WordNet の定義11,752個。1語につき3義まで、各義の最初の例文を1つ（あれば）。品詞内は WordNet の頻度順。品詞をまたぐ頻度の記録はないため、各品詞の第1義を先にし、同順位は名詞・動詞・形容詞・副詞の順 |
+| `word_glosses.csv` | NGSL と CEFR-J A1〜B1 の語の定義と各義の最初の例文（活用形も含め10,188語、22,345義）。v5 から Simple English Wiktionary を優先し、定義がない語だけ WordNet で補う。1品詞につき3義まで、Wiktionary のページの順。NGSL はリストの活用形も収録。CSV の品詞は n/v/a/r とその他の o。活用形の記事は元の語の同じ品詞の定義を使う。単語帳に送るときは全体で3義まで |
 | `word_synonyms.csv` | WordNet の同じ synset に属する NGSL の語の組。返事で使ってもよい語を選ぶとき、単なる類義語を避けるために使う |
 
 ## vocabulary/
@@ -75,6 +76,16 @@ CEFR-J Wordlist の利用条件には、再配布してよいかが書かれて�
 
 取得元は https://github.com/globalwordnet/english-wordnet/releases/tag/2025-edition 、取得日は 2026-11-14。
 
+## simplewiktionary/
+
+| ファイル | 内容 |
+| --- | --- |
+| `simplewiktionary-20261101-pages-articles.xml.bz2` | Wikimedia の配布用ダンプ（約8.6MB）。DataBuilder は記事の品詞見出しごとに定義と最初の例文を読み、テンプレート・リンク・強調・HTML を除いて平文にする。アプリは元ダンプをダウンロードしない |
+
+取得元は https://dumps.wikimedia.org/simplewiktionary/20261101/simplewiktionary-20261101-pages-articles.xml.bz2 、取得日は 2026-11-17。古いダンプは配布元から消えるため、取得したファイルをそのまま保存する。
+
+出典は [Simple English Wiktionary](https://simple.wiktionary.org/)（Wikimedia Foundation のプロジェクト）。執筆者は各記事の履歴（`https://simple.wiktionary.org/w/index.php?title=見出し語&action=history`）に載っている。定義・例文とその加工結果のライセンスは [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)。
+
 ## numberbatch/
 
 | ファイル | 内容 |
@@ -97,9 +108,10 @@ CEFR-J Wordlist の利用条件には、再配布してよいかが書かれて�
 | --- | --- | --- |
 | NGSL 1.2 | CC BY-SA 4.0 | Browne, C., Culligan, B., & Phillips, J. *The New General Service List* (version 1.2). https://www.newgeneralservicelist.com/ |
 | Open English WordNet 2025 | CC BY 4.0 | McCrae, J. P., et al. https://github.com/globalwordnet/english-wordnet （`wordnet/` に写しを置いている） |
+| Simple English Wiktionary | CC BY-SA 4.0 | Wikimedia Foundation のプロジェクト。https://simple.wiktionary.org/ 。執筆者は各記事の履歴（元ダンプを `simplewiktionary/` に保存）。定義・例文を平文に加工して使用 |
 | ConceptNet Numberbatch 19.08 | CC BY-SA 4.0 | Luminoso Technologies, Inc. https://github.com/commonsense/conceptnet-numberbatch 。Speer, R., Chin, J., & Havasi, C. (2017). ConceptNet 5.5: An Open Multilingual Graph of General Knowledge. AAAI 2017（NGSL の見出し語の行だけを `numberbatch/` に置いている） |
 | ConceptNet 5.7 | CC BY-SA 4.0 | Speer, R., Chin, J., & Havasi, C. (2017). ConceptNet 5.5: An Open Multilingual Graph of General Knowledge. AAAI 2017。https://conceptnet.io/ （人が書いた関係の数だけを `conceptnet/` に置いている） |
-| `generated/` | CC BY-SA 4.0 | NGSL・Open English WordNet・Numberbatch・CEFR-J・ConceptNet から生成。NGSL を加工したデータのため、NGSL と同じライセンスになる |
+| `generated/` | CC BY-SA 4.0 | NGSL・Open English WordNet・Numberbatch・CEFR-J・ConceptNet・Simple English Wiktionary から生成。NGSL を加工したデータのため、NGSL と同じライセンスになる |
 | `vocabulary/` | CC BY-SA 4.0 | Tell の開発者が作成 |
 | CEFR-J Wordlist 1.5 | 独自の条件（研究・商用とも無料、出典の表示が必要。CC BY-SA ではない） | The CEFR-J Wordlist Version 1.5. Compiled by Yukio Tono, Tokyo University of Foreign Studies. 著作権は東京外国語大学 投野研究室 |
 
@@ -110,5 +122,7 @@ CC BY-SA 4.0：https://creativecommons.org/licenses/by-sa/4.0/
 ## 更新のしかた
 
 1. `vocabulary/` は、このリポジトリで直接直してコミットする。
-2. `generated/` は、Tell のリポジトリで `dotnet run --project tools/Tell.DataBuilder` を実行して作り直す（出力先はこのリポジトリの `generated/`）。Numberbatch の元のファイルを Tell の `tools/fetch-numberbatch.sh` で取ってあれば、`numberbatch/` も作り直す。ConceptNet の元のファイル（`tools/fetch-conceptnet.sh`）があれば `conceptnet/` も作り直す。
+2. `generated/` は、Tell のリポジトリで `dotnet run --project tools/Tell.DataBuilder` を実行して作り直す（出力先はこのリポジトリの `generated/`）。Simple English Wiktionary はこのリポジトリの保存済みダンプを `bzip2` で展開して読む。Numberbatch の元のファイルを Tell の `tools/fetch-numberbatch.sh` で取ってあれば、`numberbatch/` も作り直す。ConceptNet の元のファイル（`tools/fetch-conceptnet.sh`）があれば `conceptnet/` も作り直す。
 3. 新しい版を出すときは、タグ（`v1`、`v2` …）を打ってプッシュし、Tell の側のファイルの一覧（タグと SHA-256）を更新する。打ったタグの中身は変えない（アプリがそのタグの SHA-256 を持っているため）。
+
+v5 の見出し語は4,827語（NGSL は補足を含む2,859語、NGSL 外の CEFR-J A1〜B1 は1,968語）。Simple English Wiktionary 4,724語、WordNet による補完76語、どちらにも定義なし27語。NGSL の活用形のみ7,210語のうち、Simple English Wiktionary 5,289語、WordNet 99語を収録。活用形の記事に定義がなくても、アプリは従来どおり NGSL の見出し語で引く。
