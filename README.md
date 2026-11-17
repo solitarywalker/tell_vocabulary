@@ -126,3 +126,5 @@ CC BY-SA 4.0：https://creativecommons.org/licenses/by-sa/4.0/
 3. 新しい版を出すときは、タグ（`v1`、`v2` …）を打ってプッシュし、Tell の側のファイルの一覧（タグと SHA-256）を更新する。打ったタグの中身は変えない（アプリがそのタグの SHA-256 を持っているため）。
 
 v5 の見出し語は4,827語（NGSL は補足を含む2,859語、NGSL 外の CEFR-J A1〜B1 は1,968語）。Simple English Wiktionary 4,724語、WordNet による補完76語、どちらにも定義なし27語。NGSL の活用形のみ7,210語のうち、Simple English Wiktionary 5,289語、WordNet 99語を収録。活用形の記事に定義がなくても、アプリは従来どおり NGSL の見出し語で引く。
+
+v6 では、WordNet で補う定義を生成時に `It means {定義}.` の文にする。動詞は `It means to {定義}.` とし、定義がすでに `to ` で始まるときは重ねない。アプリの説明の型を文の定義にそろえるため（2026-11-17、ユーザーの判断）。語数・義数と Wiktionary の定義・例文は v5 と同じ。
