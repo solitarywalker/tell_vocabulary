@@ -37,6 +37,8 @@ CEFR-J Wordlist の利用条件には、再配布してよいかが書かれて�
 | `word_synonyms.csv` | WordNet の同じ synset に属する NGSL の語の組。返事で使ってもよい語を選ぶとき、単なる類義語を避けるために使う |
 | `adverbs.txt` | NGSL 外の語のうち、WordNet に副詞の意味がある語（v7 から。3,336語）。返答の範囲外の語を副詞として隠すとき、品詞の推定が述語の形容詞（`a bit wobbly`）を副詞としたものを除くために使う |
 | `article_exceptions.csv` | 頭の文字（母音字か）と頭の音が食い違うため、a・an を頭の文字で決められない語（v8 から。hour → an、university → a など159語）。WordNet の発音から作り、発音が複数あれば多いほうに合わせる。返答の範囲外の形容詞を隠したあと、a・an を次の語に合わせて直すのに使う |
+| `adjective_adverbs.txt` | `adverbs.txt` の語のうち、WordNet で形容詞の意味もある語（v9 から。kindly・stiff など252語）。`linking_verbs.txt` の動詞のあとでは述語の形容詞（`looks stiff`）とみなし、副詞として隠さない |
+| `linking_verbs.txt` | WordNet で、形容詞を取る動詞の型（`via-adj`：Somebody ----s Adjective、`vii-adj`：Something ----s Adjective/Noun）を持つ1語の動詞の原形（v9 から。look・feel・seem・be など58語） |
 
 ## vocabulary/
 
