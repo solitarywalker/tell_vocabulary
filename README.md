@@ -35,6 +35,7 @@ CEFR-J Wordlist の利用条件には、再配布してよいかが書かれて�
 
 | `word_glosses.csv` | NGSL と CEFR-J A1〜B1 の語の定義と各義の最初の例文（活用形も含め10,188語、22,345義）。v5 から Simple English Wiktionary を優先し、定義がない語だけ WordNet で補う。1品詞につき3義まで、Wiktionary のページの順。NGSL はリストの活用形も収録。CSV の品詞は n/v/a/r とその他の o。活用形の記事は元の語の同じ品詞の定義を使う。単語帳に送るときは全体で3義まで |
 | `word_synonyms.csv` | WordNet の同じ synset に属する NGSL の語の組。返事で使ってもよい語を選ぶとき、単なる類義語を避けるために使う |
+| `adverbs.txt` | NGSL 外の語のうち、WordNet に副詞の意味がある語（v7 から。3,336語）。返答の範囲外の語を副詞として隠すとき、品詞の推定が述語の形容詞（`a bit wobbly`）を副詞としたものを除くために使う |
 
 ## vocabulary/
 
