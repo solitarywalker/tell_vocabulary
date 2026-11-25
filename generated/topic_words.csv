@@ -2,7 +2,7 @@
 ## 形式：見出し語,最初の名詞の意味の分類（WordNet の lexfile）
 ## 分類：noun.artifact noun.food noun.animal noun.location noun.plant noun.object noun.substance noun.phenomenon noun.event。形容詞・副詞にもなる語は除く。
 ## CEFR-J に名詞の項目があり、ConceptNet の人が書いた UsedFor の始点・AtLocation の始点と終点の合計が1以上の語だけ。
-## vocabulary/topic_excluded_words.txt の語は生成時に除く（2026-11-17、ユーザーの判断）。
+## vocabulary/topic_excluded_words.txt の語は生成時に除く。
 ## tools/Tell.DataBuilder で生成。手で編集しないこと。
 ## 元データ：NGSL 1.2、Open English WordNet 2025、CEFR-J Wordlist 1.5、ConceptNet 5.7（出典・利用条件は README.md）。
 ## このファイルのライセンス：CC BY-SA 4.0
