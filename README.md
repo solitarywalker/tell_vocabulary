@@ -5,7 +5,7 @@
 | ディレクトリ | 内容 | ライセンス |
 | --- | --- | --- |
 | `generated/` | Tell の `tools/Tell.DataBuilder` で生成したデータ | CC BY-SA 4.0 |
-| `vocabulary/` | 手で管理しているデータ（許可リストなど） | CC BY-SA 4.0 |
+| `vocabulary/` | 手で管理しているデータ（誤判定を直す一覧など） | CC BY-SA 4.0 |
 | `ngsl/` | NGSL 1.2 の公式リストの写し | CC BY-SA 4.0 |
 | `cefrj/` | CEFR-J Wordlist 1.5 の写し | 独自の条件（下記） |
 | `wordnet/` | Open English WordNet 2025 の写し（DataBuilder の元データ） | CC BY 4.0 |
@@ -28,7 +28,7 @@ CEFR-J Wordlist の利用条件には、再配布してよいかが書かれて�
 
 | ファイル | 内容 |
 | --- | --- |
-| `excluded_nouns.csv` | NGSL 外の動詞・形容詞・副詞と関連しているため、範囲外とする名詞（約10,000語） |
+| `excluded_nouns.csv` | NGSL 外の動詞・形容詞・副詞と関連しているため、範囲外とする名詞（約10,000語）。CEFR-J の A1〜B1 の語（vacation など）は、この一覧にあってもアプリが許可する。v11 で、易しい名詞を手で選んで許可する一覧（`vocabulary/allowed_nouns.txt`）をなくした |
 | `semantic_vectors.csv` | NGSL の見出し語の意味のベクトル（Numberbatch の300次元から全語の平均を引き、長さを1にして8ビットに縮めたもの）。意味の近さをコサイン類似度で測る |
 | `topic_words.csv` | 最初の一言・新しい話題の材料にする具体的な名詞（WordNet の最初の名詞の意味の分類で選ぶ。形容詞・副詞にもなる語は除く。v4 は CEFR-J に名詞の項目があり、ConceptNet の人が書いた UsedFor の始点・AtLocation の始点と終点の合計が1以上の語に絞り、`vocabulary/topic_excluded_words.txt` を生成時に除く。267語。WordNet は noun.artifact・food・animal・plant・location・object・substance・phenomenon・event の9分類） |
 | `word_ranks.csv` | NGSL の本体の見出し語の頻度の順位（SFI の高い順）。順位が大きいほど難しいとみなす（約2,800語） |
@@ -46,7 +46,6 @@ CEFR-J Wordlist の利用条件には、再配布してよいかが書かれて�
 
 | ファイル | 内容 |
 | --- | --- |
-| `allowed_nouns.txt` | 除外ルールに当てはまるが、易しいので許可する名詞（名詞と判定されたときだけ許可） |
 | `allowed_words.txt` | チェッカーの誤判定を直すため、品詞にかかわらず許可する語。会話で見つけたときに追加する |
 | `topic_excluded_words.txt` | 規則で外れず、実際に候補に出て困った語を DataBuilder が除く一覧（主に動詞、範囲・枠組み・抽象、機能語や別の語と紛れる語、地面・素材など）。アプリは読まない |
 | `unsuitable_words.txt` | 話題の候補と、返事で使ってよい語の両方から外す語（暴力・性・差別・薬物・たばこ・病気・お酒など）。`conversation_excluded_words.txt` と合わせて使う。語彙チェックには使わない |
