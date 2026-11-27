@@ -20,7 +20,7 @@
 
 そのため、データを作ったときに使ったファイルを、そのままここに写して置いています。中身は一切変えていません。
 
-DataBuilder の元データ（WordNet・Numberbatch・ConceptNet・Simple English Wiktionary）も、同じく、配布元で差し替えられたり、配布が止まったりしても、`generated/` を同じ元データから作り直せるように置いています（ConceptNet は更新が止まっているプロジェクトです）。Numberbatch の元のファイル（英語のみ、約325MB）は、GitHub に置ける大きさを超えるため置かず、NGSL の見出し語の行だけを取り出したものを置いています。今の `generated/` は、これだけで作り直せます。元のファイルが要るのは、NGSL の見出し語の一覧そのものを変えたときだけです。英語版 Wiktionary の抽出データ（kaikki.org の wiktextract、約2.9GB）も同じ理由で置かず、生成した `generated/adverb_phrases_wiktionary.txt` だけを置いています。元のファイルが要るのは、取り出し方を変えたときだけです。
+DataBuilder の元データ（WordNet・Numberbatch・ConceptNet・Simple English Wiktionary）も、同じく、配布元で差し替えられたり、配布が止まったりしても、`generated/` を同じ元データから作り直せるように置いています（ConceptNet は更新が止まっているプロジェクトです）。Numberbatch の元のファイル（英語のみ、約325MB）は、GitHub に置ける大きさを超えるため置かず、NGSL の見出し語の行だけを取り出したものを置いています。今の `generated/` は、これだけで作り直せます。元のファイルが要るのは、NGSL の見出し語の一覧そのものを変えたときだけです。
 
 CEFR-J Wordlist の利用条件には、再配布してよいかが書かれていません。ここに置いているのは、上の理由でファイルの差し替えに備えるためだけです。権利者から求められた場合は、すぐに取り下げます。
 
@@ -40,7 +40,6 @@ CEFR-J Wordlist の利用条件には、再配布してよいかが書かれて�
 | `adjective_adverbs.txt` | `adverbs.txt` の語のうち、WordNet で形容詞の意味もある語（v9 から。kindly・stiff など252語）。`linking_verbs.txt` の動詞のあとでは述語の形容詞（`looks stiff`）とみなし、副詞として隠さない |
 | `linking_verbs.txt` | WordNet で、形容詞を取る動詞の型（`via-adj`：Somebody ----s Adjective、`vii-adj`：Something ----s Adjective/Noun）を持つ1語の動詞の原形（v9 から。look・feel・seem・be など58語） |
 | `adverb_phrases_wordnet.txt` | WordNet にある、複数の語でできた副詞（v10 から。a bit・a little・kind of など688句。英字の語を空白でつないだ形だけ）。`linking_verbs.txt` の動詞と `adjective_adverbs.txt` の語の間にあれば飛ばして、述語の形容詞（`feels a bit poorly`）とみなす。品詞の推定では a bit が限定詞と名詞に分かれるため |
-| `adverb_phrases_wiktionary.txt` | 英語版 Wiktionary にあり、`adverb_phrases_wordnet.txt` にない、複数の語でできた副詞（v10 から。a little bit・a tad・quite a bit など1,623句）。使い方は `adverb_phrases_wordnet.txt` と同じ。重なる句は WordNet の側にだけ入れる |
 
 ## vocabulary/
 
@@ -114,10 +113,9 @@ CEFR-J Wordlist の利用条件には、再配布してよいかが書かれて�
 | NGSL 1.2 | CC BY-SA 4.0 | Browne, C., Culligan, B., & Phillips, J. *The New General Service List* (version 1.2). https://www.newgeneralservicelist.com/ |
 | Open English WordNet 2025 | CC BY 4.0 | McCrae, J. P., et al. https://github.com/globalwordnet/english-wordnet （`wordnet/` に写しを置いている） |
 | Simple English Wiktionary | CC BY-SA 4.0 | Wikimedia Foundation のプロジェクト。https://simple.wiktionary.org/ 。執筆者は各記事の履歴（元ダンプを `simplewiktionary/` に保存）。定義・例文を平文に加工して使用 |
-| 英語版 Wiktionary | CC BY-SA 4.0 | Wikimedia Foundation のプロジェクト。https://en.wiktionary.org/ 。執筆者は各記事の履歴（`https://en.wiktionary.org/w/index.php?title=見出し語&action=history`）。kaikki.org の抽出データ（Ylonen, T. (2022). Wiktextract: Wiktionary as Machine-Readable Structured Data. LREC 2022。https://kaikki.org/dictionary/raw-wiktextract-data.jsonl.gz 、2026-10-30 版）から、複数の語でできた副詞の見出しだけを使用 |
 | ConceptNet Numberbatch 19.08 | CC BY-SA 4.0 | Luminoso Technologies, Inc. https://github.com/commonsense/conceptnet-numberbatch 。Speer, R., Chin, J., & Havasi, C. (2017). ConceptNet 5.5: An Open Multilingual Graph of General Knowledge. AAAI 2017（NGSL の見出し語の行だけを `numberbatch/` に置いている） |
 | ConceptNet 5.7 | CC BY-SA 4.0 | Speer, R., Chin, J., & Havasi, C. (2017). ConceptNet 5.5: An Open Multilingual Graph of General Knowledge. AAAI 2017。https://conceptnet.io/ （人が書いた関係の数だけを `conceptnet/` に置いている） |
-| `generated/` | CC BY-SA 4.0 | NGSL・Open English WordNet・Numberbatch・CEFR-J・ConceptNet・Simple English Wiktionary・英語版 Wiktionary から生成。NGSL を加工したデータのため、NGSL と同じライセンスになる |
+| `generated/` | CC BY-SA 4.0 | NGSL・Open English WordNet・Numberbatch・CEFR-J・ConceptNet・Simple English Wiktionary から生成。NGSL を加工したデータのため、NGSL と同じライセンスになる |
 | `vocabulary/` | CC BY-SA 4.0 | Tell の開発者が作成 |
 | CEFR-J Wordlist 1.5 | 独自の条件（研究・商用とも無料、出典の表示が必要。CC BY-SA ではない） | The CEFR-J Wordlist Version 1.5. Compiled by Yukio Tono, Tokyo University of Foreign Studies. 著作権は東京外国語大学 投野研究室 |
 
@@ -128,7 +126,7 @@ CC BY-SA 4.0：https://creativecommons.org/licenses/by-sa/4.0/
 ## 更新のしかた
 
 1. `vocabulary/` は、このリポジトリで直接直してコミットする。
-2. `generated/` は、Tell のリポジトリで `dotnet run --project tools/Tell.DataBuilder` を実行して作り直す（出力先はこのリポジトリの `generated/`）。Simple English Wiktionary はこのリポジトリの保存済みダンプを `bzip2` で展開して読む。Numberbatch の元のファイルを Tell の `tools/fetch-numberbatch.sh` で取ってあれば、`numberbatch/` も作り直す。ConceptNet の元のファイル（`tools/fetch-conceptnet.sh`）があれば `conceptnet/` も作り直す。英語版 Wiktionary の抽出データ（`tools/fetch-wiktionary.sh`）があれば `generated/adverb_phrases_wiktionary.txt` も作り直す。なければ今のファイルを残す。
+2. `generated/` は、Tell のリポジトリで `dotnet run --project tools/Tell.DataBuilder` を実行して作り直す（出力先はこのリポジトリの `generated/`）。Simple English Wiktionary はこのリポジトリの保存済みダンプを `bzip2` で展開して読む。Numberbatch の元のファイルを Tell の `tools/fetch-numberbatch.sh` で取ってあれば、`numberbatch/` も作り直す。ConceptNet の元のファイル（`tools/fetch-conceptnet.sh`）があれば `conceptnet/` も作り直す。なければ今のファイルを残す。
 3. 新しい版を出すときは、タグ（`v1`、`v2` …）を打ってプッシュし、Tell の側のファイルの一覧（タグと SHA-256）を更新する。打ったタグの中身は変えない（アプリがそのタグの SHA-256 を持っているため）。
 
 v5 の見出し語は4,827語（NGSL は補足を含む2,859語、NGSL 外の CEFR-J A1〜B1 は1,968語）。Simple English Wiktionary 4,724語、WordNet による補完76語、どちらにも定義なし27語。NGSL の活用形のみ7,210語のうち、Simple English Wiktionary 5,289語、WordNet 99語を収録。活用形の記事に定義がなくても、アプリは従来どおり NGSL の見出し語で引く。
