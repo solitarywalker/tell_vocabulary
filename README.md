@@ -13,6 +13,7 @@
 | `numberbatch/` | ConceptNet Numberbatch 19.08 から、NGSL の見出し語の行だけを取り出したもの（DataBuilder の元データ） | CC BY-SA 4.0 |
 
 | `conceptnet/` | ConceptNet 5.7 assertions の人が書いた関係を NGSL の見出し語ごとに数えたもの（DataBuilder の元データ） | CC BY-SA 4.0 |
+| `wikipedia/` | 英語版 Wikipedia の記事「List of adjectival and demonymic forms for countries and nations」の HTML の写し（DataBuilder の元データ） | CC BY-SA 4.0 |
 
 ## なぜ配布元のデータの写しを置いているか
 
@@ -40,6 +41,7 @@ CEFR-J Wordlist の利用条件には、再配布してよいかが書かれて�
 | `adjective_adverbs.txt` | `adverbs.txt` の語のうち、WordNet で形容詞の意味もある語（v9 から。kindly・stiff など252語）。`linking_verbs.txt` の動詞のあとでは述語の形容詞（`looks stiff`）とみなし、副詞として隠さない |
 | `linking_verbs.txt` | WordNet で、形容詞を取る動詞の型（`via-adj`：Somebody ----s Adjective、`vii-adj`：Something ----s Adjective/Noun）を持つ1語の動詞の原形（v9 から。look・feel・seem・be など58語） |
 | `adverb_phrases_wordnet.txt` | WordNet にある、複数の語でできた副詞（v10 から。a bit・a little・kind of など688句。英字の語を空白でつないだ形だけ）。`linking_verbs.txt` の動詞と `adjective_adverbs.txt` の語の間にあれば飛ばして、述語の形容詞（`feels a bit poorly`）とみなす。品詞の推定では a bit が限定詞と名詞に分かれるため |
+| `country_adjectives.txt` | 国・地域の形容詞（v14 から。Chinese・Kenyan・English など324語）。`wikipedia/` の表の全262行の Adjectivals の列を、1語ずつに分けたもの（South African → South・African）。語彙チェックで、大文字で始まる形のままなら許可する。NGSL にも CEFR-J にもないものが多く、名詞でもないため範囲外になっていた |
 
 ## vocabulary/
 
@@ -51,7 +53,7 @@ CEFR-J Wordlist の利用条件には、再配布してよいかが書かれて�
 
 | `conversation_excluded_words.txt` | 話題の材料と、返事で使ってもよい語の両方から除く語（user・fellow・scene など、人の呼び方や意味のぼやけた語）。語彙チェックには使わない |
 
-お酒の語も除くことにした（2026-11-17、ユーザーの判断）。`allowed_words.txt` の sightseeing・temple は、CEFR-J A2・A1 で許可できることを実際のチェッカーで確認して外した。English は形容詞として使うので残す（同日、ユーザーの判断）。
+お酒の語も除くことにした（2026-11-17、ユーザーの判断）。`allowed_words.txt` の sightseeing・temple は、CEFR-J A2・A1 で許可できることを実際のチェッカーで確認して外した。English は形容詞として使うので残す（同日、ユーザーの判断）。v14 で、English は `generated/country_adjectives.txt`（England の行）で許可するので、`allowed_words.txt` から外した。ファイルは、また誤判定を直すときのために残す（ユーザーの判断）。
 
 ## ngsl/
 
@@ -106,6 +108,14 @@ CEFR-J Wordlist の利用条件には、再配布してよいかが書かれて�
 
 元データは ConceptNet 5.7 assertions（https://conceptnet.s3.amazonaws.com/downloads/2019/edges/conceptnet-assertions-5.7.0.csv.gz ）、取得日は 2026-11-16。ライセンスは CC BY-SA 4.0。元の約498MB のファイルは置かず、Tell の DataBuilder で関係の数だけを書き出す。
 
+## wikipedia/
+
+| ファイル | 内容 |
+| --- | --- |
+| `List_of_adjectival_and_demonymic_forms_for_countries_and_nations-1384750644.html` | 英語版 Wikipedia の記事 https://en.wikipedia.org/wiki/List_of_adjectival_and_demonymic_forms_for_countries_and_nations の版 1384750644 の HTML。表の Adjectivals の列から `generated/country_adjectives.txt` を作る。アプリはダウンロードしない |
+
+記事のページ（`/wiki/`）は robots.txt で許されているので、連絡先にこのリポジトリの URL を入れた User-Agent で1回だけ取得した。取得日は 2026-11-27。
+
 ## 出典・ライセンス
 
 | データ | ライセンス | 出典 |
@@ -115,7 +125,8 @@ CEFR-J Wordlist の利用条件には、再配布してよいかが書かれて�
 | Simple English Wiktionary | CC BY-SA 4.0 | Wikimedia Foundation のプロジェクト。https://simple.wiktionary.org/ 。執筆者は各記事の履歴（元ダンプを `simplewiktionary/` に保存）。定義・例文を平文に加工して使用 |
 | ConceptNet Numberbatch 19.08 | CC BY-SA 4.0 | Luminoso Technologies, Inc. https://github.com/commonsense/conceptnet-numberbatch 。Speer, R., Chin, J., & Havasi, C. (2017). ConceptNet 5.5: An Open Multilingual Graph of General Knowledge. AAAI 2017（NGSL の見出し語の行だけを `numberbatch/` に置いている） |
 | ConceptNet 5.7 | CC BY-SA 4.0 | Speer, R., Chin, J., & Havasi, C. (2017). ConceptNet 5.5: An Open Multilingual Graph of General Knowledge. AAAI 2017。https://conceptnet.io/ （人が書いた関係の数だけを `conceptnet/` に置いている） |
-| `generated/` | CC BY-SA 4.0 | NGSL・Open English WordNet・Numberbatch・CEFR-J・ConceptNet・Simple English Wiktionary から生成。NGSL を加工したデータのため、NGSL と同じライセンスになる |
+| 英語版 Wikipedia「List of adjectival and demonymic forms for countries and nations」 | CC BY-SA 4.0 | Wikipedia の寄稿者。https://en.wikipedia.org/wiki/List_of_adjectival_and_demonymic_forms_for_countries_and_nations （版 1384750644、執筆者は記事の履歴）。表の国・地域の形容詞を1語ずつの一覧に加工して使用（`wikipedia/` に写しを置いている） |
+| `generated/` | CC BY-SA 4.0 | NGSL・Open English WordNet・Numberbatch・CEFR-J・ConceptNet・Simple English Wiktionary・英語版 Wikipedia から生成。NGSL を加工したデータのため、NGSL と同じライセンスになる |
 | `vocabulary/` | CC BY-SA 4.0 | Tell の開発者が作成 |
 | CEFR-J Wordlist 1.5 | 独自の条件（研究・商用とも無料、出典の表示が必要。CC BY-SA ではない） | The CEFR-J Wordlist Version 1.5. Compiled by Yukio Tono, Tokyo University of Foreign Studies. 著作権は東京外国語大学 投野研究室 |
 
