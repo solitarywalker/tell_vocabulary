@@ -1,35 +1,29 @@
 # tell_vocabulary
 
-英会話学習アプリ Tell が使う語彙データと、それを作るための元データです。アプリはこのデータを同梱せず、初回起動のときに、このリポジトリのタグを付けた版からダウンロードします。ダウンロードしたファイルは、アプリに書いてある SHA-256 と照らし合わせます。`wordnet/`・`numberbatch/`・`conceptnet/`・`simplewiktionary/` は、Tell の `tools/Tell.DataBuilder` で `generated/` を作り直すときだけ使う元データで、アプリはダウンロードしません。
+英会話学習アプリ Tell が使う語彙データと、それを作るための元データです。語彙チェックの範囲を決めるファイル（NGSL 1.2・CEFR-J の写し、`excluded_nouns.csv`・`country_adjectives.txt`・`allowed_words.txt`）は、v15 から [graded-english-vocabulary](https://github.com/solitarywalker/graded-english-vocabulary) に移しました。v16 で、その2つを作るプログラムと元データ（Open English WordNet・英語版 Wikipedia の記事）も、そちらに移しました。アプリはそれらをそちらから、ほかをこのリポジトリからダウンロードします。アプリはこのデータを同梱せず、初回起動のときに、このリポジトリのタグを付けた版からダウンロードします。ダウンロードしたファイルは、アプリに書いてある SHA-256 と照らし合わせます。`numberbatch/`・`conceptnet/`・`simplewiktionary/` は、Tell の `tools/Tell.DataBuilder` で `generated/` を作り直すときだけ使う元データで、アプリはダウンロードしません。
 
 | ディレクトリ | 内容 | ライセンス |
 | --- | --- | --- |
 | `generated/` | Tell の `tools/Tell.DataBuilder` で生成したデータ | CC BY-SA 4.0 |
 | `vocabulary/` | 手で管理しているデータ（誤判定を直す一覧など） | CC BY-SA 4.0 |
-| `ngsl/` | NGSL 1.2 の公式リストの写し | CC BY-SA 4.0 |
-| `cefrj/` | CEFR-J Wordlist 1.5 の写し | 独自の条件（下記） |
-| `wordnet/` | Open English WordNet 2025 の写し（DataBuilder の元データ） | CC BY 4.0 |
+| `ngsl/` | NGSL 1.2 の頻度リストの写し（DataBuilder の元データ） | CC BY-SA 4.0 |
 | `simplewiktionary/` | Simple English Wiktionary 2026-11-01 の配布用ダンプ（DataBuilder の元データ） | CC BY-SA 4.0 |
 | `numberbatch/` | ConceptNet Numberbatch 19.08 から、NGSL の見出し語の行だけを取り出したもの（DataBuilder の元データ） | CC BY-SA 4.0 |
 
 | `conceptnet/` | ConceptNet 5.7 assertions の人が書いた関係を NGSL の見出し語ごとに数えたもの（DataBuilder の元データ） | CC BY-SA 4.0 |
-| `wikipedia/` | 英語版 Wikipedia の記事「List of adjectival and demonymic forms for countries and nations」の HTML の写し（DataBuilder の元データ） | CC BY-SA 4.0 |
 
 ## なぜ配布元のデータの写しを置いているか
 
-アプリは、ダウンロードしたファイルが、データを作ったときのものと同じかを SHA-256 で確かめます。NGSL と CEFR-J を配布元から直接ダウンロードすると、配布元でファイルが差し替えられたとき（版の更新や、表記の手直しなど）にハッシュが合わなくなります。そうなると、アプリを更新するまで、新しくインストールした人は初回起動のダウンロードを終えられません。また、差し替えられた内容は、このリポジトリの生成データ（`generated/`）を作ったときの元データと食い違います。
+アプリは、ダウンロードしたファイルが、データを作ったときのものと同じかを SHA-256 で確かめます。NGSL の頻度リストを配布元から直接ダウンロードすると、配布元でファイルが差し替えられたとき（版の更新や、表記の手直しなど）にハッシュが合わなくなります。そうなると、アプリを更新するまで、新しくインストールした人は初回起動のダウンロードを終えられません。また、差し替えられた内容は、このリポジトリの生成データ（`generated/`）を作ったときの元データと食い違います。
 
 そのため、データを作ったときに使ったファイルを、そのままここに写して置いています。中身は一切変えていません。
 
-DataBuilder の元データ（WordNet・Numberbatch・ConceptNet・Simple English Wiktionary）も、同じく、配布元で差し替えられたり、配布が止まったりしても、`generated/` を同じ元データから作り直せるように置いています（ConceptNet は更新が止まっているプロジェクトです）。Numberbatch の元のファイル（英語のみ、約325MB）は、GitHub に置ける大きさを超えるため置かず、NGSL の見出し語の行だけを取り出したものを置いています。今の `generated/` は、これだけで作り直せます。元のファイルが要るのは、NGSL の見出し語の一覧そのものを変えたときだけです。
-
-CEFR-J Wordlist の利用条件には、再配布してよいかが書かれていません。ここに置いているのは、上の理由でファイルの差し替えに備えるためだけです。権利者から求められた場合は、すぐに取り下げます。
+DataBuilder の元データ（Numberbatch・ConceptNet・Simple English Wiktionary）も、同じく、配布元で差し替えられたり、配布が止まったりしても、`generated/` を同じ元データから作り直せるように置いています（ConceptNet は更新が止まっているプロジェクトです）。Numberbatch の元のファイル（英語のみ、約325MB）は、GitHub に置ける大きさを超えるため置かず、NGSL の見出し語の行だけを取り出したものを置いています。今の `generated/` は、これだけで作り直せます。元のファイルが要るのは、NGSL の見出し語の一覧そのものを変えたときだけです。
 
 ## generated/
 
 | ファイル | 内容 |
 | --- | --- |
-| `excluded_nouns.csv` | NGSL 外の動詞・形容詞・副詞と関連しているため、範囲外とする名詞（約10,000語）。CEFR-J の A1〜B1 の語（vacation など）は、この一覧にあってもアプリが許可する。v11 で、易しい名詞を手で選んで許可する一覧（`vocabulary/allowed_nouns.txt`）をなくした |
 | `semantic_vectors.csv` | NGSL の見出し語の意味のベクトル（Numberbatch の300次元から全語の平均を引き、長さを1にして8ビットに縮めたもの）。意味の近さをコサイン類似度で測る |
 | `topic_words.csv` | 最初の一言・新しい話題の材料にする具体的な名詞（WordNet の最初の名詞の意味の分類で選ぶ。形容詞・副詞にもなる語は除く。v4 は CEFR-J に名詞の項目があり、ConceptNet の人が書いた UsedFor の始点・AtLocation の始点と終点の合計が1以上の語に絞り、`vocabulary/topic_excluded_words.txt` を生成時に除く。267語。WordNet は noun.artifact・food・animal・plant・location・object・substance・phenomenon・event の9分類） |
 | `word_ranks.csv` | NGSL の本体の見出し語の頻度の順位（SFI の高い順）。順位が大きいほど難しいとみなす（約2,800語） |
@@ -41,46 +35,25 @@ CEFR-J Wordlist の利用条件には、再配布してよいかが書かれて�
 | `adjective_adverbs.txt` | `adverbs.txt` の語のうち、WordNet で形容詞の意味もある語（v9 から。kindly・stiff など252語）。`linking_verbs.txt` の動詞のあとでは述語の形容詞（`looks stiff`）とみなし、副詞として隠さない |
 | `linking_verbs.txt` | WordNet で、形容詞を取る動詞の型（`via-adj`：Somebody ----s Adjective、`vii-adj`：Something ----s Adjective/Noun）を持つ1語の動詞の原形（v9 から。look・feel・seem・be など58語） |
 | `adverb_phrases_wordnet.txt` | WordNet にある、複数の語でできた副詞（v10 から。a bit・a little・kind of など688句。英字の語を空白でつないだ形だけ）。`linking_verbs.txt` の動詞と `adjective_adverbs.txt` の語の間にあれば飛ばして、述語の形容詞（`feels a bit poorly`）とみなす。品詞の推定では a bit が限定詞と名詞に分かれるため |
-| `country_adjectives.txt` | 国・地域の形容詞（v14 から。Chinese・Kenyan・English など324語）。`wikipedia/` の表の全262行の Adjectivals の列を、1語ずつに分けたもの（South African → South・African）。語彙チェックで、大文字で始まる形のままなら許可する。NGSL にも CEFR-J にもないものが多く、名詞でもないため範囲外になっていた |
 
 ## vocabulary/
 
 | ファイル | 内容 |
 | --- | --- |
-| `allowed_words.txt` | チェッカーの誤判定を直すため、品詞にかかわらず許可する語。会話で見つけたときに追加する |
 | `topic_excluded_words.txt` | 規則で外れず、実際に候補に出て困った語を DataBuilder が除く一覧（主に動詞、範囲・枠組み・抽象、機能語や別の語と紛れる語、地面・素材など）。アプリは読まない |
 | `unsuitable_words.txt` | 話題の候補と、返事で使ってよい語の両方から外す語（暴力・性・差別・薬物・たばこ・病気・お酒など）。`conversation_excluded_words.txt` と合わせて使う。語彙チェックには使わない |
 
 | `conversation_excluded_words.txt` | 話題の材料と、返事で使ってもよい語の両方から除く語（user・fellow・scene など、人の呼び方や意味のぼやけた語）。語彙チェックには使わない |
 
-お酒の語も除くことにした（2026-11-17、ユーザーの判断）。`allowed_words.txt` の sightseeing・temple は、CEFR-J A2・A1 で許可できることを実際のチェッカーで確認して外した。English は形容詞として使うので残す（同日、ユーザーの判断）。v14 で、English は `generated/country_adjectives.txt`（England の行）で許可するので、`allowed_words.txt` から外した。ファイルは、また誤判定を直すときのために残す（ユーザーの判断）。
+お酒の語も除くことにした（2026-11-17、ユーザーの判断）。`allowed_words.txt` の sightseeing・temple は、CEFR-J A2・A1 で許可できることを実際のチェッカーで確認して外した。English は形容詞として使うので残す（同日、ユーザーの判断）。v14 で、English は `generated/country_adjectives.txt`（England の行）で許可するので、`allowed_words.txt` から外した。ファイルは、また誤判定を直すときのために残す（ユーザーの判断）。v15 で、`allowed_words.txt` は graded-english-vocabulary に移した。
 
 ## ngsl/
 
 | ファイル | 内容 |
 | --- | --- |
-| `NGSL_12_lemmatized_for_research.csv` | 研究用。考えられる活用形をすべて含む |
-| `NGSL_12_lemmatized_for_teaching.csv` | 教育用。よく使われる活用形のみ |
-| `SUP_lemmatized.csv` | 補足リスト（曜日・月・数詞など52語） |
 | `NGSLwithSFI-31K.xlsx` | 約31,000語の頻度順位。`generated/word_ranks.csv` の元データ。アプリはダウンロードしない |
 
 取得元は https://www.newgeneralservicelist.com/ 、取得日は 2026-11-08。
-
-## cefrj/
-
-| ファイル | 内容 |
-| --- | --- |
-| `cefrj-vocabulary-profile-1.5.csv` | 見出し語・品詞・CEFR の段階（A1〜B2）など。Tell は A1〜B1 の語を、NGSL の範囲外でも AI の返答で使ってよい語にする |
-
-取得元は https://github.com/openlanguageprofiles/olp-en-cefrj （元の配布は http://www.cefr-j.org/download.html ）、取得日は 2026-11-14。
-
-## wordnet/
-
-| ファイル | 内容 |
-| --- | --- |
-| `english-wordnet-2025.xml.gz` | Open English WordNet 2025（約11MB）。`generated/excluded_nouns.csv`・`topic_words.csv`・`word_glosses.csv`・`word_synonyms.csv` の元データ |
-
-取得元は https://github.com/globalwordnet/english-wordnet/releases/tag/2025-edition 、取得日は 2026-11-14。
 
 ## simplewiktionary/
 
@@ -108,27 +81,18 @@ CEFR-J Wordlist の利用条件には、再配布してよいかが書かれて�
 
 元データは ConceptNet 5.7 assertions（https://conceptnet.s3.amazonaws.com/downloads/2019/edges/conceptnet-assertions-5.7.0.csv.gz ）、取得日は 2026-11-16。ライセンスは CC BY-SA 4.0。元の約498MB のファイルは置かず、Tell の DataBuilder で関係の数だけを書き出す。
 
-## wikipedia/
-
-| ファイル | 内容 |
-| --- | --- |
-| `List_of_adjectival_and_demonymic_forms_for_countries_and_nations-1384750644.html` | 英語版 Wikipedia の記事 https://en.wikipedia.org/wiki/List_of_adjectival_and_demonymic_forms_for_countries_and_nations の版 1384750644 の HTML。表の Adjectivals の列から `generated/country_adjectives.txt` を作る。アプリはダウンロードしない |
-
-記事のページ（`/wiki/`）は robots.txt で許されているので、連絡先にこのリポジトリの URL を入れた User-Agent で1回だけ取得した。取得日は 2026-11-27。
-
 ## 出典・ライセンス
 
 | データ | ライセンス | 出典 |
 | --- | --- | --- |
 | NGSL 1.2 | CC BY-SA 4.0 | Browne, C., Culligan, B., & Phillips, J. *The New General Service List* (version 1.2). https://www.newgeneralservicelist.com/ |
-| Open English WordNet 2025 | CC BY 4.0 | McCrae, J. P., et al. https://github.com/globalwordnet/english-wordnet （`wordnet/` に写しを置いている） |
+| Open English WordNet 2025 | CC BY 4.0 | McCrae, J. P., et al. https://github.com/globalwordnet/english-wordnet （写しは graded-english-vocabulary に置いている。Tell の DataBuilder はそこから取ったものを読む） |
 | Simple English Wiktionary | CC BY-SA 4.0 | Wikimedia Foundation のプロジェクト。https://simple.wiktionary.org/ 。執筆者は各記事の履歴（元ダンプを `simplewiktionary/` に保存）。定義・例文を平文に加工して使用 |
 | ConceptNet Numberbatch 19.08 | CC BY-SA 4.0 | Luminoso Technologies, Inc. https://github.com/commonsense/conceptnet-numberbatch 。Speer, R., Chin, J., & Havasi, C. (2017). ConceptNet 5.5: An Open Multilingual Graph of General Knowledge. AAAI 2017（NGSL の見出し語の行だけを `numberbatch/` に置いている） |
 | ConceptNet 5.7 | CC BY-SA 4.0 | Speer, R., Chin, J., & Havasi, C. (2017). ConceptNet 5.5: An Open Multilingual Graph of General Knowledge. AAAI 2017。https://conceptnet.io/ （人が書いた関係の数だけを `conceptnet/` に置いている） |
-| 英語版 Wikipedia「List of adjectival and demonymic forms for countries and nations」 | CC BY-SA 4.0 | Wikipedia の寄稿者。https://en.wikipedia.org/wiki/List_of_adjectival_and_demonymic_forms_for_countries_and_nations （版 1384750644、執筆者は記事の履歴）。表の国・地域の形容詞を1語ずつの一覧に加工して使用（`wikipedia/` に写しを置いている） |
-| `generated/` | CC BY-SA 4.0 | NGSL・Open English WordNet・Numberbatch・CEFR-J・ConceptNet・Simple English Wiktionary・英語版 Wikipedia から生成。NGSL を加工したデータのため、NGSL と同じライセンスになる |
+| `generated/` | CC BY-SA 4.0 | NGSL・Open English WordNet・Numberbatch・CEFR-J・ConceptNet・Simple English Wiktionary から生成。NGSL を加工したデータのため、NGSL と同じライセンスになる |
 | `vocabulary/` | CC BY-SA 4.0 | Tell の開発者が作成 |
-| CEFR-J Wordlist 1.5 | 独自の条件（研究・商用とも無料、出典の表示が必要。CC BY-SA ではない） | The CEFR-J Wordlist Version 1.5. Compiled by Yukio Tono, Tokyo University of Foreign Studies. 著作権は東京外国語大学 投野研究室 |
+| CEFR-J Wordlist 1.5 | 独自の条件（研究・商用とも無料、出典の表示が必要。CC BY-SA ではない） | The CEFR-J Wordlist Version 1.5. Compiled by Yukio Tono, Tokyo University of Foreign Studies. 著作権は東京外国語大学 投野研究室（写しは graded-english-vocabulary に置いている） |
 
 > This data contains semantic vectors from ConceptNet Numberbatch, by Luminoso Technologies, Inc. You may redistribute or modify the data under the terms of the CC-By-SA 4.0 license.
 
@@ -137,8 +101,8 @@ CC BY-SA 4.0：https://creativecommons.org/licenses/by-sa/4.0/
 ## 更新のしかた
 
 1. `vocabulary/` は、このリポジトリで直接直してコミットする。
-2. `generated/` は、Tell のリポジトリで `dotnet run --project tools/Tell.DataBuilder` を実行して作り直す（出力先はこのリポジトリの `generated/`）。Simple English Wiktionary はこのリポジトリの保存済みダンプを `bzip2` で展開して読む。Numberbatch の元のファイルを Tell の `tools/fetch-numberbatch.sh` で取ってあれば、`numberbatch/` も作り直す。ConceptNet の元のファイル（`tools/fetch-conceptnet.sh`）があれば `conceptnet/` も作り直す。なければ今のファイルを残す。
-3. 新しい版を出すときは、タグ（`v1`、`v2` …）を打ってプッシュし、Tell の側のファイルの一覧（タグと SHA-256）を更新する。打ったタグの中身は変えない（アプリがそのタグの SHA-256 を持っているため）。
+2. `generated/` は、Tell のリポジトリで `dotnet run --project tools/Tell.DataBuilder` を実行して作り直す（出力先はこのリポジトリの `generated/`）。`excluded_nouns.csv`・`country_adjectives.txt` は、graded-english-vocabulary のプログラムで作る。Simple English Wiktionary はこのリポジトリの保存済みダンプを `bzip2` で展開して読む。Numberbatch の元のファイルを Tell の `tools/fetch-numberbatch.sh` で取ってあれば、`numberbatch/` も作り直す。ConceptNet の元のファイル（`tools/fetch-conceptnet.sh`）があれば `conceptnet/` も作り直す。なければ今のファイルを残す。
+3. 新しい版を出すときは、タグ（`v1`、`v2` …）を打ってプッシュし（graded-english-vocabulary のファイルを変えたときは、そちらにもタグを打つ）、Tell の側のファイルの一覧（タグと SHA-256）を更新する。打ったタグの中身は変えない（アプリがそのタグの SHA-256 を持っているため）。
 
 v5 の見出し語は4,827語（NGSL は補足を含む2,859語、NGSL 外の CEFR-J A1〜B1 は1,968語）。Simple English Wiktionary 4,724語、WordNet による補完76語、どちらにも定義なし27語。NGSL の活用形のみ7,210語のうち、Simple English Wiktionary 5,289語、WordNet 99語を収録。活用形の記事に定義がなくても、アプリは従来どおり NGSL の見出し語で引く。
 
